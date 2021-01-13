@@ -6,7 +6,7 @@ import java.time.Month;
 
 public class PersonalID {
 
-    String id;
+    private String id;
     private int day;
     private int month;
     private int year;
