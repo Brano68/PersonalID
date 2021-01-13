@@ -1,8 +1,23 @@
 package sk.kosickaakademia.nebus.rodnecislo;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.Month;
+
 public class PersonalID {
 
-    public boolean checkID(String id){
+    String id;
+    private int day;
+    private int month;
+    private int year;
+    private LocalDate date;
+    private int age;
+
+    public PersonalID(String id){
+        this.id = id;
+    }
+
+    public boolean checkID(){
         if(id.length()<9 || id.length()>11){
             return false;
         }
@@ -32,9 +47,9 @@ public class PersonalID {
         }
 
         //
-        int month = Integer.valueOf(id.substring(2,4));
-        int day = Integer.valueOf(id.substring(4,6));
-        int year = Integer.valueOf(id.substring(0,2));
+        this.month = Integer.valueOf(id.substring(2,4));
+        this.day = Integer.valueOf(id.substring(4,6));
+        this.year = Integer.valueOf(id.substring(0,2));
 
         if(year<22){
             year = year + 2000;
@@ -92,6 +107,82 @@ public class PersonalID {
             System.out.println("Nie je delitelne 11");
             return false;
         }
+    }
+
+    public void howOldAreYou(){
+        LocalDate dateTime = LocalDate.now();
+        System.out.println(dateTime);
+        int dayNow = dateTime.getDayOfMonth();
+        int monthNow = dateTime.getMonthValue();
+        int yearNow = dateTime.getYear();
+
+        //aktualny rok minus rok narodenia
+        if(monthNow < month){
+            age = yearNow-year-1;
+            System.out.println("Si stary: " + age);
+        } else if(monthNow == month && dayNow < day){
+            age = yearNow-year-1;
+            System.out.println("Si stary: " + age);
+        }else{
+            age = yearNow-year;
+            System.out.println("Si stary: " + age);
+        }
+
+    }
+
+    public DayOfWeek getDayofWeekNew() {
+        date = LocalDate.of(year, Month.of(month), day);
+        DayOfWeek day = date.getDayOfWeek();
+        return day;
+    }
+
+    public void howManyDaysHaveYouBeenLiving(){
+        date = LocalDate.of(year, Month.of(month), day);
+        LocalDate dateTime = LocalDate.now();
+        int yearNow = dateTime.getYear();
+        int days = 0;
+
+        //poriesene rok o jedna vacsi ako si sa narodil az po prislusny rok mensi o jeden
+        for(int i = year+1; i < yearNow; i++){
+            if(year%4 == 0){
+                days = days + 366;
+            }else{
+                days = days + 365;
+            }
+        }
+
+        //este osetrit rok narodenia a prislusny rok
+        //prislusny rok kolko dni ubehlo od yaciatku roka
+        int prislusnyRokDni = dateTime.getDayOfYear();
+        //System.out.println("Dni" + prislusnyRokDni);
+
+
+        //rok narodenia po koniec kolko dni ubehlo
+        int prislusnyRokDni2 = date.getDayOfYear();
+        int hodnota;
+        //ak v priestupnom si sa narodil
+        if(month%4 == 0){
+            hodnota = 366 - prislusnyRokDni2;
+            //System.out.println("Dni" + hodnota);
+        }else{
+            hodnota = 365 - prislusnyRokDni2;
+            //System.out.println("Dni" + hodnota);
+        }
+        //System.out.println("Dni" + prislusnyRokDni2);
+
+        int vysledok = days+prislusnyRokDni+hodnota;
+
+        System.out.println("Zijes: " + vysledok + " dni.");
+    }
+
+    public void retaired(){
+        if(age>=62){
+            System.out.println("Uz si na dochodku");
+            return;
+        }
+
+        int i = 62 - age;
+            System.out.println("Do dochodku ostava " + i + " rokov");
     }
 
 }
