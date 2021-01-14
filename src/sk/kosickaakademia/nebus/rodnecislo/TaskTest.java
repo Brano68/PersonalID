@@ -35,4 +35,25 @@ class TaskTest {
         assertEquals("KEKS", task.reverz("SKEK"));
         assertEquals("123456789", task.reverz("987654321"));
     }
+
+
+    @Test
+    void scitajCislaOd1Po10() {
+        assertEquals(55, task.scitajCislaOd1Po10());
+    }
+
+    @Test
+    void faktorial() {
+        assertEquals(1, task.faktorial(0));
+        assertEquals(-1, task.faktorial(-1));
+        assertEquals(1, task.faktorial(1));
+        assertEquals(6, task.faktorial(3));
+        assertEquals(-3628800, task.faktorial(-10));
+    }
+
+    @Test
+    void zmenRetazecNaMalePismena() {
+        assertEquals("ahoj", task.zmenRetazecNaMalePismena("AHOJ"));
+        assertEquals("mama", task.zmenRetazecNaMalePismena("MAMA"));
+    }
 }

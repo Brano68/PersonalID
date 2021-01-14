@@ -20,5 +20,8 @@ public class Main {
             System.out.println("ZLE ID!!!");
         }
 
+        Task task = new Task();
+        System.out.println(task.scitajCislaOd1Po10());
+
     }
 }

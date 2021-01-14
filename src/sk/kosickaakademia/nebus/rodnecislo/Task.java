@@ -27,4 +27,47 @@ public class Task {
         return retazec;
     }
 
+
+    //vymysliet 3 metody a testy k nim
+
+    public int scitajCislaOd1Po10(){
+        int sucet = 0;
+        for(int i = 1; i <= 10; i++){
+            sucet = sucet + i;
+        }
+        return sucet;
+    }
+
+
+    public int faktorial(int cislo){
+        if(cislo==0){
+            return 1;
+        }
+
+        int vysledok = 1;
+
+        if(cislo>0){
+            for(int i = 1; i <= cislo; i++){
+                vysledok = vysledok * i;
+            }
+            return vysledok;
+        }else{
+            cislo = cislo * (-1);
+            for(int i = 1; i <= cislo; i++){
+                vysledok = vysledok * i;
+            }
+            return vysledok * (-1);
+        }
+
+    }
+
+    public String zmenRetazecNaMalePismena(String retazec){
+        String novyRetazec = "";
+        for(int i = 0; i < retazec.length(); i++){
+            char znak = (char)(retazec.charAt(i)+' ');
+            novyRetazec += znak;
+        }
+        return novyRetazec;
+    }
+
 }
